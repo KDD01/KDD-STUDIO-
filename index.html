@@ -1,395 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KDD STUDIO | Creative Design</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KDD STUDIO | Future Design Hub</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-<link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
-<style>
-:root{
-  --bg:#070b14;
-  --card:#0f172a;
-  --primary:#00e5ff;
-  --secondary:#ff2fd0;
-  --text:#e5e7eb;
-  --muted:#9ca3af;
-  --radius:18px;
-}
+    <style>
+        :root {
+            --bg: #030712;
+            --card: rgba(15, 23, 42, 0.6);
+            --primary: #00e5ff;
+            --secondary: #ff2fd0;
+            --accent: #7000ff;
+            --text: #f3f4f6;
+            --muted: #9ca3af;
+            --radius: 24px;
+            --glow: 0 0 20px rgba(0, 229, 255, 0.4);
+        }
 
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;}
-body{background:radial-gradient(circle at top,var(--card),var(--bg));color:var(--text);}
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        
+        body { 
+            background: var(--bg); 
+            color: var(--text); 
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(0, 229, 255, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 47, 208, 0.05) 0%, transparent 20%);
+        }
 
-/* HEADER & NAV */
-header{
-  position:fixed;top:0;width:100%;
-  background:rgba(7,11,20,.85);
-  backdrop-filter:blur(12px);
-  z-index:1000;
-}
-nav{
-  max-width:1200px;margin:auto;
-  display:flex;justify-content:space-between;align-items:center;
-  padding:15px 20px;
-}
-/* SHINING KDD STUDIO TEXT */
-nav h1{
-  font-size:26px;
-  background:linear-gradient(90deg,var(--primary),var(--secondary),var(--primary));
-  -webkit-background-clip:text;
-  color:transparent;
-  animation:shineText 3s linear infinite;
-}
-@keyframes shineText{
-  0%{background-position:0%;}
-  50%{background-position:100%;}
-  100%{background-position:0%;}
-}
-nav h1{
-  background-size:200% auto;
-}
+        /* CUSTOM SCROLLBAR */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
 
-/* NAVIGATION BUTTONS DESIGN */
-nav ul{
-  list-style:none;
-  display:flex;
-  gap:20px;
-}
-nav ul li{
-  position:relative;
-}
-nav ul a{
-  display:inline-block;
-  padding:10px 20px;
-  border-radius:50px;
-  background:linear-gradient(135deg,rgba(0,229,255,.2),rgba(255,47,208,.2));
-  color:var(--text);
-  font-weight:600;
-  text-decoration:none;
-  transition: all .4s ease;
-  box-shadow:0 4px 15px rgba(0,229,255,.2), 0 4px 15px rgba(255,47,208,.2);
-}
-nav ul a:hover{
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:#000;
-  box-shadow:0 5px 25px rgba(0,229,255,.5), 0 5px 25px rgba(255,47,208,.5);
-  transform:translateY(-3px) scale(1.05);
-}
+        /* HEADER & NAVIGATION */
+        header {
+            position: fixed; top: 20px; left: 50%; transform: translateX(-50%);
+            width: 90%; max-width: 1200px;
+            background: rgba(3, 7, 18, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            z-index: 1000;
+            transition: 0.4s;
+        }
 
-/* BUTTONS */
-.btn{
-  padding:12px 28px;
-  border:none;
-  border-radius:30px;
-  background:linear-gradient(135deg,var(--primary),var(--secondary));
-  color:#000;font-weight:600;cursor:pointer;
-  box-shadow:0 5px 25px rgba(0,229,255,.4);
-  font-size:16px;
-  transition: all .4s ease;
-}
-.btn:hover{
-  transform:translateY(-5px) scale(1.05);
-  box-shadow:0 10px 45px rgba(255,47,208,.6);
-}
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 30px;
+        }
 
-/* PAGES */
-.page{display:none;}
-.page.active{display:block;}
-section{
-  min-height:100vh;
-  padding:140px 20px 80px;
-  max-width:1200px;margin:auto;
-}
+        nav h1 {
+            font-size: 24px; font-weight: 800; letter-spacing: 1px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--primary));
+            background-size: 200% auto;
+            -webkit-background-clip: text; color: transparent;
+            animation: shineText 3s linear infinite;
+        }
 
-/* HERO */
-.hero{
-  display:grid;
-  grid-template-columns:1.2fr 1fr;
-  gap:40px;align-items:center;
-}
-.hero h2{font-size:48px;line-height:1.2;}
-.hero span{
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
-  -webkit-background-clip:text;color:transparent;
-}
-.hero p{margin:20px 0;color:var(--muted);}
-.hero-card{
-  padding:16px;
-  border-radius:var(--radius);
-  background:linear-gradient(145deg,#0b1220,#020617);
-}
-.hero-img{
-  position:relative;
-  border-radius:14px;
-  overflow:hidden;
-  animation:float 6s infinite,pulse 4s infinite;
-  box-shadow:0 0 60px rgba(0,229,255,.7);
-}
-.hero-img img{width:100%;display:block;object-fit:cover;}
-.hero-img::before{
-  content:"";
-  position:absolute;top:0;left:-150%;
-  width:50%;height:100%;
-  background:linear-gradient(to right,transparent,rgba(255,255,255,.7),transparent);
-  transform:skewX(-25deg);
-  animation:shine 3.5s infinite;
-}
+        nav ul { display: flex; gap: 15px; list-style: none; }
+        
+        nav ul a {
+            color: var(--text); text-decoration: none; font-weight: 600; font-size: 14px;
+            padding: 8px 16px; border-radius: 50px; transition: 0.3s;
+            border: 1px solid transparent;
+        }
 
-/* SERVICES GRID */
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
-}
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:25px;
-  cursor:pointer;
-  transition:.4s;
-  text-align:center;
-}
-.card:hover{transform:translateY(-10px);box-shadow:0 0 45px rgba(0,229,255,.5);}
-.card i{font-size:42px;color:var(--primary);}
-.card h3{margin-top:12px;}
+        nav ul a:hover {
+            background: rgba(0, 229, 255, 0.1);
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--glow);
+        }
 
-/* SERVICE IMAGE */
-.service-img{
-  margin:40px 0;
-  border-radius:20px;
-  overflow:hidden;
-  position:relative;
-  animation:float 6s infinite,pulse 4s infinite;
-  box-shadow:0 0 70px rgba(0,229,255,.8);
-}
-.service-img img{
-  width:100%;
-  display:block;
-  object-fit:cover;
-}
-.service-img::before{
-  content:"";
-  position:absolute;top:0;left:-150%;
-  width:50%;height:100%;
-  background:linear-gradient(to right,transparent,rgba(255,255,255,.6),transparent);
-  transform:skewX(-25deg);
-  animation:shine 3.5s infinite;
-}
+        /* BUTTONS */
+        .btn {
+            padding: 12px 28px; border: none; border-radius: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: #000; font-weight: 700; cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: var(--glow);
+        }
 
-/* PRICES */
-.price{color:var(--secondary);font-weight:600;margin-top:10px;}
+        .btn:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 10px 30px rgba(255, 47, 208, 0.5); }
 
-/* ABOUT */
-.about-box{
-  background:var(--card);
-  padding:40px;
-  border-radius:18px;
-  box-shadow:0 0 50px rgba(0,229,255,.5);
-  line-height:1.8;
-}
+        /* HERO SECTION */
+        section { min-height: 100vh; padding: 140px 20px 60px; max-width: 1200px; margin: auto; }
+        .page { display: none; opacity: 0; transform: translateY(20px); transition: 0.5s ease; }
+        .page.active { display: block; opacity: 1; transform: translateY(0); }
 
-/* ORDER FORM */
-.order-box{
-  background:var(--card);
-  padding:30px;
-  border-radius:18px;
-  box-shadow:0 0 40px rgba(0,229,255,.5);
-  margin-top:30px;
-}
-.order-box input,.order-box textarea{
-  width:100%;
-  padding:12px;
-  border-radius:10px;
-  border:none;
-  margin-bottom:15px;
-  background:#020617;
-  color:white;
-  font-size:15px;
-}
+        .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center; }
+        .hero h2 { font-size: 56px; line-height: 1.1; font-weight: 800; }
+        .hero span { background: linear-gradient(90deg, var(--primary), var(--secondary)); -webkit-background-clip: text; color: transparent; }
+        .hero p { margin: 25px 0; color: var(--muted); font-size: 18px; line-height: 1.6; }
 
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:40px;
-  color:var(--muted);
-  border-top:1px solid rgba(255,255,255,.05);
-}
+        .hero-img-container {
+            position: relative; border-radius: var(--radius);
+            padding: 15px; background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(0, 229, 255, 0.2);
+            animation: float 6s ease-in-out infinite;
+        }
 
-/* ANIMATIONS */
-@keyframes shine{0%{left:-150%}60%{left:150%}100%{left:150%}}
-@keyframes float{50%{transform:translateY(-12px)}}
-@keyframes pulse{50%{box-shadow:0 0 120px rgba(255,47,208,.9)}}
+        .hero-img-container img { width: 100%; border-radius: 15px; box-shadow: 0 0 50px rgba(0, 229, 255, 0.3); }
 
-/* RESPONSIVE */
-@media(max-width:900px){
-  .hero{grid-template-columns:1fr;gap:30px;}
-  .hero h2{font-size:36px;}
-  section{padding:120px 15px 80px;}
-}
-@media(max-width:500px){
-  nav ul{flex-direction:column;gap:15px;margin-top:10px;}
-  .btn{padding:10px 20px;font-size:14px;}
-}
-</style>
+        /* CARDS GRID */
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .card {
+            background: var(--card); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: var(--radius); padding: 40px; text-align: center;
+            transition: 0.4s; position: relative; overflow: hidden;
+        }
+
+        .card::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0; transition: 0.4s;
+        }
+
+        .card:hover { transform: translateY(-15px); border-color: var(--primary); }
+        .card:hover::before { opacity: 1; }
+        .card i { font-size: 50px; margin-bottom: 20px; display: block; color: var(--primary); }
+
+        /* SERVICE IMAGES SHINING */
+        .service-img {
+            width: 100%; border-radius: var(--radius); overflow: hidden; margin: 30px 0;
+            position: relative; border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .service-img img { width: 100%; transition: 0.5s; }
+        .service-img:hover img { transform: scale(1.03); }
+
+        .service-img::after {
+            content: ""; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transform: skewX(-25deg); animation: shineSwipe 4s infinite;
+        }
+
+        /* DiNuX AI SECTION */
+        .ai-box {
+            background: linear-gradient(145deg, rgba(0, 229, 255, 0.05), rgba(112, 0, 255, 0.05));
+            border-radius: var(--radius); padding: 40px; border: 1px dashed var(--primary);
+            margin-top: 50px; text-align: center;
+        }
+
+        /* CART & FORMS */
+        .order-box {
+            background: var(--card); padding: 40px; border-radius: var(--radius);
+            box-shadow: var(--glow); border: 1px solid rgba(0, 229, 255, 0.2);
+        }
+        input, textarea {
+            width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 12px;
+            background: rgba(0, 0, 0, 0.3); border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white; outline: none; transition: 0.3s;
+        }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 229, 255, 0.2); }
+
+        /* ANIMATIONS */
+        @keyframes shineText { 0% { background-position: 0%; } 100% { background-position: 200%; } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes shineSwipe { 0% { left: -100%; } 20% { left: 100%; } 100% { left: 100%; } }
+
+        /* MOBILE OPTIMIZATION */
+        @media (max-width: 900px) {
+            .hero { grid-template-columns: 1fr; text-align: center; }
+            .hero h2 { font-size: 38px; }
+            nav ul { display: none; } /* Mobile menu can be added later */
+            header { width: 95%; top: 10px; }
+        }
+    </style>
 </head>
 
 <body>
 
 <header>
-<nav>
-  <h1>KDD STUDIO</h1>
-  <ul>
-    <li><a onclick="showPage('home')">HOME</a></li>
-    <li><a onclick="showPage('services')">SERVICES</a></li>
-    <li><a onclick="showPage('about')">ABOUT US</a></li>
-    <li><a onclick="showPage('cart')">CART (<span id="cartCount">0</span>)</a></li>
-  </ul>
-  <button class="btn" onclick="showPage('services')">Order Now</button>
-</nav>
+    <nav>
+        <h1>KDD STUDIO</h1>
+        <ul>
+            <li><a href="#" onclick="showPage('home')">HOME</a></li>
+            <li><a href="#" onclick="showPage('services')">SERVICES</a></li>
+            <li><a href="#" onclick="showPage('about')">ABOUT</a></li>
+            <li><a href="#" onclick="showPage('cart')">CART (<span id="cartCount">0</span>)</a></li>
+        </ul>
+        <button class="btn" onclick="showPage('services')">Order Now</button>
+    </nav>
 </header>
 
-<!-- HOME -->
+<!-- PAGE: HOME -->
 <section id="home" class="page active">
-<div class="hero">
-  <div>
-    <h2>3D <span>Home Designing</span><br>Modern <span>Architecture</span></h2>
-    <p>Professional 3D house designs, realistic renders & walkthrough videos.</p>
-    <button class="btn" onclick="showPage('services')">View Services</button>
-    <p>At KDD STUDIO, we specialize in turning your ideas into reality through realistic 3D home designs, architectural visualizations, and immersive walkthrough videos. Our team combines creativity, precision, and cutting-edge technology to deliver stunning, professional designs tailored to your needs.</p>
-  </div>
-  <div class="hero-card">
-    <div class="hero-img">
-      <img src="./dvni9.png">
+    <div class="hero">
+        <div>
+            <h2>3D <span>Home Design</span><br>& Future <span>Architecture</span></h2>
+            <p>At KDD STUDIO, we specialize in turning your ideas into reality through realistic 3D home designs, architectural visualizations, and immersive walkthrough videos.</p>
+            <div style="display: flex; gap: 15px; justify-content: flex-start;" class="mobile-center">
+                <button class="btn" onclick="showPage('services')">Our Services</button>
+                <button class="btn" style="background: transparent; border: 1px solid var(--primary); color: var(--primary);" onclick="window.location.href='https://github.com/KDD01/KDD-STUDIO-'">GitHub Code</button>
+            </div>
+        </div>
+        <div class="hero-img-container">
+            <img src="./dvni9.png" alt="3D Design Preview">
+        </div>
     </div>
-  </div>
-</div>
 </section>
 
-<!-- SERVICES -->
+<!-- PAGE: SERVICES -->
 <section id="services" class="page">
-<h2>Our Services</h2>
-<div class="grid" style="margin-top:40px">
-  <div class="card" onclick="showPage('service3d')">
-    <i class='bx bxs-home'></i>
-    <h3>3D Home Designing</h3>
-  </div>
-  <div class="card" onclick="showPage('servicetiktok')">
-    <i class='bx bxl-tiktok'></i>
-    <h3>TikTok Promotion</h3>
-  </div>
-  <div class="card" onclick="showPage('servicegraphic')">
-    <i class='bx bxs-paint'></i>
-    <h3>Graphic Designing</h3>
-  </div>
-</div>
+    <h2 style="text-align: center; font-size: 40px; margin-bottom: 50px;">Premium <span class="shining-text">Services</span></h2>
+    <div class="grid">
+        <div class="card" onclick="showPage('service3d')">
+            <i class='bx bxs-buildings'></i>
+            <h3>3D Home Designing</h3>
+            <p>High-end realistic renders and structural planning.</p>
+        </div>
+        <div class="card" onclick="showPage('servicetiktok')">
+            <i class='bx bxl-tiktok'></i>
+            <h3>Digital Promotion</h3>
+            <p>Grow your brand with TikTok and Viral Marketing.</p>
+        </div>
+        <div class="card" onclick="showPage('servicegraphic')">
+            <i class='bx bxs-palette'></i>
+            <h3>Graphic Designing</h3>
+            <p>Logo, Branding and High-quality UI/UX assets.</p>
+        </div>
+    </div>
 </section>
 
-<!-- 3D -->
+<!-- SERVICE DETAIL: 3D -->
 <section id="service3d" class="page">
-<h2>3D HOME DESIGNING</h2>
-<div class="service-img"><img src="front.png"></div>
-<div class="service-img"><img src="drone view.png"></div>
-<div class="service-img"><img src="UPADYA project drone view.png"></div>
-
-<center><h3>Our Packages</h3>
-<div class="price">Rs.100,000.00 Onward</div><br>
-<h3>With Full walkthrough animation Video Packages</h3>
-<div class="price">Rs.250000.00 Onward</div>
-<br>
-<button class="btn" onclick="addToCart('3D Home Designing',100000)">ADD TO CART</button></center>
+    <h2>3D ARCHITECTURAL VISUALIZATION</h2>
+    <div class="service-img"><img src="front.png"></div>
+    <div class="service-img"><img src="drone view.png"></div>
+    <div class="grid">
+        <div class="card">
+            <h4>Standard Package</h4>
+            <div style="color: var(--secondary); font-size: 24px; font-weight: 800; margin: 15px 0;">Rs. 100,000+</div>
+            <button class="btn" onclick="addToCart('3D Home Design - Std', 100000)">ADD TO CART</button>
+        </div>
+        <div class="card">
+            <h4>Premium Walkthrough</h4>
+            <div style="color: var(--secondary); font-size: 24px; font-weight: 800; margin: 15px 0;">Rs. 250,000+</div>
+            <button class="btn" onclick="addToCart('3D Design - Premium', 250000)">ADD TO CART</button>
+        </div>
+    </div>
 </section>
 
-<!-- TIKTOK -->
+<!-- SERVICE DETAIL: TIKTOK -->
 <section id="servicetiktok" class="page">
-<h2>TikTok Promotion</h2>
-<div class="service-img"><img src="tiktok post.png"></div>
-<center><h3>Our Packages</h3>
-<div class="price">Rs.25,000.00 Onward</div>
-<br><button class="btn" onclick="addToCart('TikTok Promotion',25000)">ADD TO CART</button>
-</section></center>
+    <h2>Viral TikTok Promotion</h2>
+    <div class="service-img"><img src="tiktok post.png"></div>
+    <div class="card" style="max-width: 500px; margin: auto;">
+        <h3>Growth Package</h3>
+        <div style="color: var(--secondary); font-size: 24px; font-weight: 800; margin: 15px 0;">Rs. 25,000+</div>
+        <button class="btn" onclick="addToCart('TikTok Promotion', 25000)">ADD TO CART</button>
+    </div>
+</section>
 
-<!-- GRAPHIC -->
+<!-- SERVICE DETAIL: GRAPHIC -->
 <section id="servicegraphic" class="page">
-<h2>Graphic Designing</h2>
-<div class="service-img"><img src="NEW MARKETING POST.png"></div>
-<center><h3>Our Packages</h3>
-<div class="price">Rs.15,000.00 Onward</div>
-<br><button class="btn" onclick="addToCart('Graphic Designing',15000)">ADD TO CART</button>
-</section></center>
+    <h2>Creative Graphic Design</h2>
+    <div class="service-img"><img src="NEW MARKETING POST.png"></div>
+    <div class="card" style="max-width: 500px; margin: auto;">
+        <h3>Branding Package</h3>
+        <div style="color: var(--secondary); font-size: 24px; font-weight: 800; margin: 15px 0;">Rs. 15,000+</div>
+        <button class="btn" onclick="addToCart('Graphic Design Package', 15000)">ADD TO CART</button>
+    </div>
+</section>
 
-<!-- ABOUT -->
+<!-- PAGE: ABOUT -->
 <section id="about" class="page">
-<h2>About Us</h2>
-<div class="about-box">
-<p><b>KDD STUDIO</b> is a creative design studio specialized in modern 3D home designing, architectural visualization and digital promotions.</p>
-<p>Our purpose is to deliver high quality, realistic and affordable digital design solutions for individuals and businesses.</p>
-<div class="service-img"><img src="dinush dcps.png"></div>
-</div>
-<br><br>
-<CENTER><h3>Developed By DINUSH DILHARA</h3></CENTER>
-<CENTER><H3>Designed By DINUSH DILHARA</H3></CENTER>
-<CENTER><H3>17 Years Old</H3></CENTER>
-<CENTER><H3>Owner Of KDD STUDIO</H3></CENTER>
-<CENTER><H3>Owner Of Dinu Geek Youtube Channel</H3></CENTER>
+    <div class="hero">
+        <div class="about-box">
+            <h2>The Visionary Behind <br><span>KDD STUDIO</span></h2>
+            <p><b>Dinush Dilhara</b>, at just 17 years old, is the driving force behind this creative powerhouse. A tech enthusiast, 3D designer, and content creator dedicated to quality.</p>
+            <ul>
+                <li>Owner of DS Media Hub</li>
+                <li>Founder of Dinu Geek YouTube Channel</li>
+                <li>Specialist in AI & 3D Tech</li>
+            </ul>
+        </div>
+        <div class="hero-img-container">
+            <img src="dinush dcps.png" alt="Dinush Dilhara">
+        </div>
+    </div>
+    
+    <!-- DiNuX AI PROMO -->
+    <div class="ai-box">
+        <h3>Meet DiNuX AI</h3>
+        <p>Experience the power of our custom-built Intelligence. Integrated directly into the KDD ecosystem.</p>
+        <button class="btn" onclick="alert('DiNuX AI is now active in the backend! Chat logic is ready.')">Launch DiNuX</button>
+    </div>
 </section>
 
-<!-- CART -->
+<!-- PAGE: CART -->
 <section id="cart" class="page">
-<h2>Your Cart</h2>
-<div id="cartItems" style="margin-top:20px"></div>
+    <h2>Review Your Selection</h2>
+    <div id="cartItems" style="margin: 30px 0; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px;"></div>
 
-<div class="order-box">
-<h3>Order Details</h3>
-<input id="name" placeholder="Your Name">
-<input id="phone" placeholder="Phone Number">
-<input id="location" placeholder="Location">
-<textarea id="note" placeholder="Additional Notes"></textarea>
-<button class="btn" onclick="sendWhatsApp()">Order via WhatsApp</button>
-</div>
+    <div class="order-box">
+        <h3>Complete Your Order</h3>
+        <div class="grid" style="grid-template-columns: 1fr 1fr; margin-top: 20px;">
+            <input id="name" placeholder="Full Name">
+            <input id="phone" placeholder="WhatsApp Number">
+        </div>
+        <input id="location" placeholder="Your City/Location">
+        <textarea id="note" rows="4" placeholder="Briefly describe your project requirement..."></textarea>
+        <button class="btn" style="width: 100%; padding: 20px;" onclick="sendWhatsApp()">Proceed to WhatsApp Order</button>
+    </div>
 </section>
 
-<footer>
-© 2026 KDD STUDIO <br>
-<span style="font-size:14px">Developed By Dinush Dilhara</span>
+<footer style="text-align: center; padding: 60px 20px; border-top: 1px solid rgba(255,255,255,0.05); background: #010409;">
+    <h2 style="color: var(--primary); margin-bottom: 10px;">KDD STUDIO</h2>
+    <p>© 2026 | All Rights Reserved</p>
+    <p style="color: var(--muted); font-size: 14px; margin-top: 10px;">Designed & Developed with ❤️ by <b>Dinush Dilhara</b></p>
 </footer>
 
 <script>
-let cart=[];
+    let cart = [];
 
-function showPage(id){
- document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
- document.getElementById(id).classList.add('active');
- window.scrollTo(0,0);
-}
+    function showPage(id) {
+        document.querySelectorAll('.page').forEach(p => {
+            p.classList.remove('active');
+            p.style.display = 'none';
+        });
+        const activePage = document.getElementById(id);
+        activePage.style.display = 'block';
+        setTimeout(() => activePage.classList.add('active'), 50);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-function addToCart(name,price){
- cart.push({name,price});
- document.getElementById('cartCount').innerText=cart.length;
- renderCart();
- alert(name+" added to cart");
-}
+    function addToCart(name, price) {
+        cart.push({ name, price });
+        document.getElementById('cartCount').innerText = cart.length;
+        renderCart();
+        
+        // Custom Toast Notification
+        const toast = document.createElement('div');
+        toast.style.cssText = `position:fixed; bottom:20px; right:20px; background:var(--primary); color:#000; padding:15px 25px; border-radius:50px; font-weight:bold; z-index:10000; box-shadow:0 10px 30px rgba(0,0,0,0.5);`;
+        toast.innerText = `✔ ${name} added to cart!`;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
 
-function renderCart(){
- let html="",total=0;
- cart.forEach(i=>{
-  total+=i.price;
-  html+=`<p>${i.name} - Rs.${i.price.toLocaleString()}</p>`;
- });
- html+=`<hr><b>Total: Rs.${total.toLocaleString()}</b>`;
- document.getElementById('cartItems').innerHTML=html;
-}
+    function renderCart() {
+        let html = "", total = 0;
+        if(cart.length === 0) {
+            html = "<p style='text-align:center; color:var(--muted);'>Your cart is empty.</p>";
+        } else {
+            cart.forEach((i, index) => {
+                total += i.price;
+                html += `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; padding:10px; border-bottom:1px solid rgba(255,255,255,0.05);">
+                    <span>${i.name}</span>
+                    <span style="color:var(--primary); font-weight:bold;">Rs. ${i.price.toLocaleString()}</span>
+                </div>`;
+            });
+            html += `<div style="text-align:right; margin-top:20px; font-size:22px;">Total: <span style="color:var(--secondary); font-weight:800;">Rs. ${total.toLocaleString()}</span></div>`;
+        }
+        document.getElementById('cartItems').innerHTML = html;
+    }
 
-function sendWhatsApp(){
- let msg="Order Details:%0A";
- cart.forEach(i=>msg+=`${i.name} - Rs.${i.price}%0A`);
- msg+=`%0ATotal: Rs.${cart.reduce((s,i)=>s+i.price,0)}%0A`;
- msg+=`Name: ${name.value}%0APhone: ${phone.value}%0ALocation: ${location.value}%0ANote: ${note.value}`;
- window.open(`https://wa.me/94779956510?text=${msg}`,'_blank');
-}
+    function sendWhatsApp() {
+        if(cart.length === 0) { alert("Please add a service to your cart first."); return; }
+        
+        const nameVal = document.getElementById('name').value;
+        const phoneVal = document.getElementById('phone').value;
+        
+        if(!nameVal || !phoneVal) { alert("Please fill in your Name and Phone number."); return; }
+
+        let msg = `🔥 *NEW ORDER FROM KDD STUDIO* 🔥%0A%0A`;
+        cart.forEach(i => msg += `⭐ ${i.name} - Rs. ${i.price.toLocaleString()}%0A`);
+        msg += `%0A---------------------------%0A`;
+        msg += `💰 *TOTAL: Rs. ${cart.reduce((s, i) => s + i.price, 0).toLocaleString()}*%0A`;
+        msg += `---------------------------%0A%0A`;
+        msg += `👤 *Client Name:* ${nameVal}%0A`;
+        msg += `📞 *Phone:* ${phoneVal}%0A`;
+        msg += `📍 *Location:* ${document.getElementById('location').value}%0A`;
+        msg += `📝 *Notes:* ${document.getElementById('note').value}`;
+
+        window.open(`https://wa.me/94779956510?text=${msg}`, '_blank');
+    }
 </script>
 
 </body>
 </html>
-
