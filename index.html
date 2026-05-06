@@ -32,7 +32,7 @@
         /* --- NAVIGATION --- */
         header {
             position: fixed; top: 0; width: 100%;
-            background: rgba(3, 7, 18, 0.9);
+            background: rgba(3, 7, 18, 0.95);
             backdrop-filter: blur(15px);
             z-index: 2000;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -41,6 +41,7 @@
             max-width: 1200px; margin: auto;
             display: flex; justify-content: space-between; align-items: center;
             padding: 15px 20px;
+            position: relative;
         }
         nav h1 {
             font-size: 22px; font-weight: 800;
@@ -50,8 +51,16 @@
             animation: shineText 3s linear infinite;
         }
 
-        /* NAVIGATION MENU (Desktop & Mobile Adaptive) */
-        .nav-links { display: flex; gap: 10px; list-style: none; }
+        /* MENU ICON (Mobile only) */
+        .menu-icon {
+            display: none;
+            font-size: 30px;
+            color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* NAVIGATION MENU */
+        .nav-links { display: flex; gap: 10px; list-style: none; align-items: center; }
         .nav-links a {
             color: var(--text); text-decoration: none; font-weight: 600; font-size: 13px;
             padding: 8px 15px; border-radius: 50px; transition: 0.3s;
@@ -102,19 +111,6 @@
         .card:hover { border-color: var(--primary); transform: translateY(-10px); }
         .card i { font-size: 45px; color: var(--primary); margin-bottom: 15px; }
 
-        /* --- DiNuX AI UI --- */
-        .ai-container {
-            background: rgba(0, 0, 0, 0.4); border: 2px solid var(--primary);
-            border-radius: var(--radius); padding: 25px; margin-top: 40px;
-            box-shadow: 0 0 30px rgba(0, 229, 255, 0.2);
-        }
-        .ai-chat-box { height: 200px; overflow-y: auto; margin-bottom: 15px; padding: 10px; text-align: left; }
-        .ai-input-group { display: flex; gap: 10px; }
-        .ai-input-group input { 
-            flex: 1; padding: 12px; border-radius: 30px; border: 1px solid var(--muted);
-            background: #000; color: #fff; outline: none;
-        }
-
         /* --- FORMS --- */
         .order-box { background: var(--card); padding: 25px; border-radius: var(--radius); margin-top: 20px; }
         input, textarea { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: none; background: #0f172a; color: #fff; }
@@ -125,17 +121,25 @@
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- MOBILE OPTIMIZATION (CRITICAL FIXES) --- */
+        /* --- MOBILE OPTIMIZATION --- */
         @media (max-width: 768px) {
-            nav { padding: 10px; }
-            nav h1 { font-size: 18px; }
-            .nav-links { gap: 5px; }
-            .nav-links a { font-size: 11px; padding: 6px 10px; }
-            .btn { padding: 10px 18px; font-size: 12px; }
+            .menu-icon { display: block; }
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 60px; left: 0; width: 100%;
+                background: rgba(3, 7, 18, 0.98);
+                padding: 20px;
+                text-align: center;
+                border-bottom: 1px solid var(--primary);
+                gap: 15px;
+            }
+            .nav-links.active { display: flex; }
+            .nav-links a { font-size: 16px; padding: 10px; display: block; width: 100%; }
             .hero-text h2 { font-size: 30px; }
             section { padding: 80px 15px 40px; }
             .grid { grid-template-columns: 1fr; }
-            .ai-input-group { flex-direction: column; }
         }
     </style>
 </head>
@@ -145,10 +149,15 @@
 <header>
     <nav>
         <h1>KDD STUDIO</h1>
-        <ul class="nav-links">
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class='bx bx-menu-alt-right'></i>
+        </div>
+        <ul class="nav-links" id="navLinks">
             <li><a href="#" onclick="showPage('home')">HOME</a></li>
             <li><a href="#" onclick="showPage('services')">SERVICES</a></li>
+            <li><a href="#" onclick="showPage('about')">ABOUT US</a></li>
             <li><a href="#" onclick="showPage('cart')">CART (<span id="cartCount">0</span>)</a></li>
+            <li><button class="btn" style="width: 100%;" onclick="showPage('services')">Order Now</button></li>
         </ul>
     </nav>
 </header>
@@ -160,6 +169,7 @@
             <h2>3D <span>Home Designing</span><br>Modern Architecture</h2>
             <p style="color: var(--muted); margin: 15px 0;">Professional 3D house designs, realistic renders & walkthrough videos.</p>
             <button class="btn" onclick="showPage('services')">Explore Services</button>
+            <p style="margin-top: 20px; font-size: 14px;">At KDD STUDIO, we specialize in turning your ideas into reality through realistic 3D home designs, architectural visualizations, and immersive walkthrough videos. Our team combines creativity, precision, and cutting-edge technology to deliver stunning, professional designs tailored to your needs.</p>
         </div>
         <div class="hero-img">
             <img src="./dvni9.png" alt="3D Work">
@@ -184,44 +194,75 @@
             <h3>Graphic Designing</h3>
         </div>
     </div>
-
-    <!-- DiNuX AI INTEGRATED -->
-    <div class="ai-container">
-        <h3><i class='bx bxs-bot'></i> Talk with DiNuX AI</h3>
-        <div class="ai-chat-box" id="chatBox">
-            <p style="color: var(--muted);">DiNuX: Hello! How can I help you today?</p>
-        </div>
-        <div class="ai-input-group">
-            <input type="text" id="userInput" placeholder="Type a message...">
-            <button class="btn" onclick="aiReply()">Send</button>
-        </div>
-    </div>
 </section>
 
-<!-- SERVICE DETAIL: 3D (Content preserved) -->
+<!-- 3D HOME DESIGNING -->
 <section id="service3d" class="page">
     <h2>3D HOME DESIGNING</h2>
     <div class="hero-img" style="margin: 20px 0;"><img src="front.png"></div>
-    <div class="card">
-        <h3>Package Pricing</h3>
-        <p>Standard: Rs. 100,000.00+</p>
-        <p>Full Animation: Rs. 250,000.00+</p>
+    <div class="hero-img" style="margin: 20px 0;"><img src="drone view.png"></div>
+    <div class="hero-img" style="margin: 20px 0;"><img src="UPADYA project drone view.png"></div>
+    <center>
+        <h3>Our Packages</h3>
+        <p style="color: var(--secondary); font-weight: 800; font-size: 20px;">Rs.100,000.00 Onward</p><br>
+        <h3>Walkthrough Animation Packages</h3>
+        <p style="color: var(--secondary); font-weight: 800; font-size: 20px;">Rs.250,000.00 Onward</p>
         <br>
-        <button class="btn" onclick="addToCart('3D Home Designing', 100000)">Add to Cart</button>
+        <button class="btn" onclick="addToCart('3D Home Designing', 100000)">ADD TO CART</button>
+    </center>
+</section>
+
+<!-- TIKTOK PROMOTION -->
+<section id="servicetiktok" class="page">
+    <h2>TikTok Promotion</h2>
+    <div class="hero-img" style="margin: 20px 0;"><img src="tiktok post.png"></div>
+    <center>
+        <h3>Our Packages</h3>
+        <p style="color: var(--secondary); font-weight: 800; font-size: 20px;">Rs.25,000.00 Onward</p>
+        <br>
+        <button class="btn" onclick="addToCart('TikTok Promotion', 25000)">ADD TO CART</button>
+    </center>
+</section>
+
+<!-- GRAPHIC DESIGNING -->
+<section id="servicegraphic" class="page">
+    <h2>Graphic Designing</h2>
+    <div class="hero-img" style="margin: 20px 0;"><img src="NEW MARKETING POST.png"></div>
+    <center>
+        <h3>Our Packages</h3>
+        <p style="color: var(--secondary); font-weight: 800; font-size: 20px;">Rs.15,000.00 Onward</p>
+        <br>
+        <button class="btn" onclick="addToCart('Graphic Designing', 15000)">ADD TO CART</button>
+    </center>
+</section>
+
+<!-- ABOUT US -->
+<section id="about" class="page">
+    <h2>About Us</h2>
+    <div class="card" style="text-align: left; line-height: 2;">
+        <p><b>KDD STUDIO</b> is a creative design studio specialized in modern 3D home designing, architectural visualization and digital promotions.</p>
+        <p>Our purpose is to deliver high quality, realistic and affordable digital design solutions for individuals and businesses.</p>
+        <div class="hero-img" style="margin-top: 20px;"><img src="dinush dcps.png"></div>
+    </div>
+    <div style="text-align: center; margin-top: 30px;">
+        <h3>Developed & Designed By DINUSH DILHARA</h3>
+        <p>Owner Of KDD STUDIO | Owner Of Dinu Geek Youtube Channel</p>
+        <p>17 Years Old</p>
     </div>
 </section>
 
-<!-- CART & ORDER -->
+<!-- CART -->
 <section id="cart" class="page">
     <h2>Your Cart</h2>
-    <div id="cartItems" style="margin: 20px 0; min-height: 50px;"></div>
+    <div id="cartItems" style="margin: 20px 0; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;"></div>
     
     <div class="order-box">
         <h3>Order Details</h3>
         <input id="name" placeholder="Your Name">
         <input id="phone" placeholder="Phone Number">
-        <textarea id="note" placeholder="Project details..."></textarea>
-        <button class="btn" style="width: 100%;" onclick="sendWhatsApp()">Confirm via WhatsApp</button>
+        <input id="location" placeholder="Location">
+        <textarea id="note" placeholder="Additional Notes"></textarea>
+        <button class="btn" style="width: 100%;" onclick="sendWhatsApp()">Order via WhatsApp</button>
     </div>
 </section>
 
@@ -232,7 +273,12 @@
 <script>
     let cart = [];
 
+    function toggleMenu() {
+        document.getElementById('navLinks').classList.toggle('active');
+    }
+
     function showPage(id) {
+        document.getElementById('navLinks').classList.remove('active');
         document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
         document.getElementById(id).classList.add('active');
         window.scrollTo({top: 0, behavior: 'smooth'});
@@ -242,37 +288,28 @@
         cart.push({name, price});
         document.getElementById('cartCount').innerText = cart.length;
         renderCart();
-        alert(name + " added!");
+        alert(name + " added to cart!");
     }
 
     function renderCart() {
         let html = "", total = 0;
-        cart.forEach(i => {
-            total += i.price;
-            html += `<p>✅ ${i.name} - Rs.${i.price.toLocaleString()}</p>`;
-        });
-        html += `<hr style='margin:10px 0; opacity:0.2'><b>Total: Rs.${total.toLocaleString()}</b>`;
+        if(cart.length === 0) {
+            html = "<p style='color:var(--muted)'>Your cart is empty.</p>";
+        } else {
+            cart.forEach(i => {
+                total += i.price;
+                html += `<p>✅ ${i.name} - Rs.${i.price.toLocaleString()}</p>`;
+            });
+            html += `<hr style='margin:10px 0; opacity:0.1'><b>Total: Rs.${total.toLocaleString()}</b>`;
+        }
         document.getElementById('cartItems').innerHTML = html;
     }
 
-    function aiReply() {
-        let input = document.getElementById('userInput');
-        let box = document.getElementById('chatBox');
-        if(input.value.trim() == "") return;
-        
-        box.innerHTML += `<p><b>You:</b> ${input.value}</p>`;
-        setTimeout(() => {
-            box.innerHTML += `<p style="color:var(--primary)"><b>DiNuX:</b> I am processing your request for KDD Studio services! How else can I assist?</p>`;
-            box.scrollTop = box.scrollHeight;
-        }, 800);
-        input.value = "";
-    }
-
     function sendWhatsApp() {
-        if(cart.length == 0) { alert("Cart is empty!"); return; }
-        let msg = `*New Order from KDD Studio*%0A`;
-        cart.forEach(i => msg += `- ${i.name}%0A`);
-        msg += `%0A*Details:*%0AName: ${document.getElementById('name').value}%0APhone: ${document.getElementById('phone').value}`;
+        if(cart.length === 0) { alert("Please add a service to cart first."); return; }
+        let msg = `*ORDER FROM KDD STUDIO*%0A`;
+        cart.forEach(i => msg += `- ${i.name} (Rs. ${i.price})%0A`);
+        msg += `%0A*Details:*%0AName: ${document.getElementById('name').value}%0APhone: ${document.getElementById('phone').value}%0ALocation: ${document.getElementById('location').value}%0ANote: ${document.getElementById('note').value}`;
         window.open(`https://wa.me/94779956510?text=${msg}`);
     }
 </script>
